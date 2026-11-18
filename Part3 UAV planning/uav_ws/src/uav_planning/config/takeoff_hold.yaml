@@ -1,0 +1,12 @@
+# 参数只在启动时读取；改完后重启节点。仅用于当前单机 SITL。
+takeoff_hold_node:
+  ros__parameters:
+    # 配套：Gazebo /clock 桥接，PX4 的 UXRCE_DDS_SYNCT=0。
+    use_sim_time: true
+
+    # 相对首次有效 PX4 本地位置向上飞5米，不是地图绝对 Z=5米。
+    # NED 的 Z 向下，因此 C++ 中用“起点 Z - target_altitude”。
+    target_altitude: 5.0
+    control_rate: 20.0          # 心跳/目标发布频率，Hz；需要持续高于2Hz
+    feedback_timeout: 1.0      # PX4 位置和状态反馈的接收超时，仿真秒
+    auto_arm: true             # true：预发送心跳后自动请求 Offboard、解锁

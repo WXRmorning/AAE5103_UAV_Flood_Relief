@@ -1,0 +1,1106 @@
+{
+  "scenario": {
+    "counts": [
+      3,
+      2,
+      4
+    ],
+    "loads": {
+      "A": [
+        5.0,
+        5.0,
+        3.09
+      ],
+      "B": [
+        5.0,
+        3.73
+      ],
+      "C": [
+        5.0,
+        5.0,
+        5.0,
+        3.18
+      ]
+    },
+    "distance": {
+      "A": 1.5,
+      "B": 2.5,
+      "C": 3.5
+    },
+    "travel": {
+      "A": 6,
+      "B": 10,
+      "C": 14
+    },
+    "priority": {
+      "A": 2,
+      "B": 1,
+      "C": 3
+    },
+    "deadline": {
+      "A": 15,
+      "B": 25,
+      "C": 10
+    },
+    "late_penalty": 35.0,
+    "makespan_penalty": 0.5
+  },
+  "methods": {
+    "Nearest-first": {
+      "score": -934.0,
+      "first": {
+        "A": 3.0,
+        "B": 11.0,
+        "C": 23.0
+      },
+      "missed": 1,
+      "makespan": 50,
+      "weighted_arrival": 454.0,
+      "late": 13.0,
+      "rows": [
+        {
+          "hub": "A",
+          "drone": "UAV 1",
+          "start": 0,
+          "arrival": 3.0,
+          "finish": 6,
+          "load": 5.0,
+          "first": true,
+          "deadline": 15,
+          "late": 0
+        },
+        {
+          "hub": "A",
+          "drone": "UAV 2",
+          "start": 0,
+          "arrival": 3.0,
+          "finish": 6,
+          "load": 5.0,
+          "first": false,
+          "deadline": 15,
+          "late": 0
+        },
+        {
+          "hub": "A",
+          "drone": "UAV 1",
+          "start": 6,
+          "arrival": 9.0,
+          "finish": 12,
+          "load": 3.09,
+          "first": false,
+          "deadline": 15,
+          "late": 0
+        },
+        {
+          "hub": "B",
+          "drone": "UAV 2",
+          "start": 6,
+          "arrival": 11.0,
+          "finish": 16,
+          "load": 5.0,
+          "first": true,
+          "deadline": 25,
+          "late": 0
+        },
+        {
+          "hub": "B",
+          "drone": "UAV 1",
+          "start": 12,
+          "arrival": 17.0,
+          "finish": 22,
+          "load": 3.73,
+          "first": false,
+          "deadline": 25,
+          "late": 0
+        },
+        {
+          "hub": "C",
+          "drone": "UAV 2",
+          "start": 16,
+          "arrival": 23.0,
+          "finish": 30,
+          "load": 5.0,
+          "first": true,
+          "deadline": 10,
+          "late": 13.0
+        },
+        {
+          "hub": "C",
+          "drone": "UAV 1",
+          "start": 22,
+          "arrival": 29.0,
+          "finish": 36,
+          "load": 5.0,
+          "first": false,
+          "deadline": 10,
+          "late": 0
+        },
+        {
+          "hub": "C",
+          "drone": "UAV 2",
+          "start": 30,
+          "arrival": 37.0,
+          "finish": 44,
+          "load": 5.0,
+          "first": false,
+          "deadline": 10,
+          "late": 0
+        },
+        {
+          "hub": "C",
+          "drone": "UAV 1",
+          "start": 36,
+          "arrival": 43.0,
+          "finish": 50,
+          "load": 3.18,
+          "first": false,
+          "deadline": 10,
+          "late": 0
+        }
+      ],
+      "sequence": "AAABBCCCC"
+    },
+    "Priority-first": {
+      "score": -1525.0,
+      "first": {
+        "A": 31.0,
+        "B": 39.0,
+        "C": 7.0
+      },
+      "missed": 2,
+      "makespan": 50,
+      "weighted_arrival": 450.0,
+      "late": 30.0,
+      "rows": [
+        {
+          "hub": "C",
+          "drone": "UAV 1",
+          "start": 0,
+          "arrival": 7.0,
+          "finish": 14,
+          "load": 5.0,
+          "first": true,
+          "deadline": 10,
+          "late": 0
+        },
+        {
+          "hub": "C",
+          "drone": "UAV 2",
+          "start": 0,
+          "arrival": 7.0,
+          "finish": 14,
+          "load": 5.0,
+          "first": false,
+          "deadline": 10,
+          "late": 0
+        },
+        {
+          "hub": "C",
+          "drone": "UAV 1",
+          "start": 14,
+          "arrival": 21.0,
+          "finish": 28,
+          "load": 5.0,
+          "first": false,
+          "deadline": 10,
+          "late": 0
+        },
+        {
+          "hub": "C",
+          "drone": "UAV 2",
+          "start": 14,
+          "arrival": 21.0,
+          "finish": 28,
+          "load": 3.18,
+          "first": false,
+          "deadline": 10,
+          "late": 0
+        },
+        {
+          "hub": "A",
+          "drone": "UAV 1",
+          "start": 28,
+          "arrival": 31.0,
+          "finish": 34,
+          "load": 5.0,
+          "first": true,
+          "deadline": 15,
+          "late": 16.0
+        },
+        {
+          "hub": "A",
+          "drone": "UAV 2",
+          "start": 28,
+          "arrival": 31.0,
+          "finish": 34,
+          "load": 5.0,
+          "first": false,
+          "deadline": 15,
+          "late": 0
+        },
+        {
+          "hub": "A",
+          "drone": "UAV 1",
+          "start": 34,
+          "arrival": 37.0,
+          "finish": 40,
+          "load": 3.09,
+          "first": false,
+          "deadline": 15,
+          "late": 0
+        },
+        {
+          "hub": "B",
+          "drone": "UAV 2",
+          "start": 34,
+          "arrival": 39.0,
+          "finish": 44,
+          "load": 5.0,
+          "first": true,
+          "deadline": 25,
+          "late": 14.0
+        },
+        {
+          "hub": "B",
+          "drone": "UAV 1",
+          "start": 40,
+          "arrival": 45.0,
+          "finish": 50,
+          "load": 3.73,
+          "first": false,
+          "deadline": 25,
+          "late": 0
+        }
+      ],
+      "sequence": "CCCCAAABB"
+    },
+    "Hybrid (rule)": {
+      "score": -656.0,
+      "first": {
+        "A": 3.0,
+        "B": 31.0,
+        "C": 7.0
+      },
+      "missed": 1,
+      "makespan": 48,
+      "weighted_arrival": 422.0,
+      "late": 6.0,
+      "rows": [
+        {
+          "hub": "C",
+          "drone": "UAV 1",
+          "start": 0,
+          "arrival": 7.0,
+          "finish": 14,
+          "load": 5.0,
+          "first": true,
+          "deadline": 10,
+          "late": 0
+        },
+        {
+          "hub": "A",
+          "drone": "UAV 2",
+          "start": 0,
+          "arrival": 3.0,
+          "finish": 6,
+          "load": 5.0,
+          "first": true,
+          "deadline": 15,
+          "late": 0
+        },
+        {
+          "hub": "C",
+          "drone": "UAV 2",
+          "start": 6,
+          "arrival": 13.0,
+          "finish": 20,
+          "load": 5.0,
+          "first": false,
+          "deadline": 10,
+          "late": 0
+        },
+        {
+          "hub": "A",
+          "drone": "UAV 1",
+          "start": 14,
+          "arrival": 17.0,
+          "finish": 20,
+          "load": 5.0,
+          "first": false,
+          "deadline": 15,
+          "late": 0
+        },
+        {
+          "hub": "C",
+          "drone": "UAV 1",
+          "start": 20,
+          "arrival": 27.0,
+          "finish": 34,
+          "load": 5.0,
+          "first": false,
+          "deadline": 10,
+          "late": 0
+        },
+        {
+          "hub": "A",
+          "drone": "UAV 2",
+          "start": 20,
+          "arrival": 23.0,
+          "finish": 26,
+          "load": 3.09,
+          "first": false,
+          "deadline": 15,
+          "late": 0
+        },
+        {
+          "hub": "B",
+          "drone": "UAV 2",
+          "start": 26,
+          "arrival": 31.0,
+          "finish": 36,
+          "load": 5.0,
+          "first": true,
+          "deadline": 25,
+          "late": 6.0
+        },
+        {
+          "hub": "C",
+          "drone": "UAV 1",
+          "start": 34,
+          "arrival": 41.0,
+          "finish": 48,
+          "load": 3.18,
+          "first": false,
+          "deadline": 10,
+          "late": 0
+        },
+        {
+          "hub": "B",
+          "drone": "UAV 2",
+          "start": 36,
+          "arrival": 41.0,
+          "finish": 46,
+          "load": 3.73,
+          "first": false,
+          "deadline": 25,
+          "late": 0
+        }
+      ],
+      "sequence": "CACACABCB"
+    },
+    "Deadline-aware (rule)": {
+      "score": -472.0,
+      "first": {
+        "A": 3.0,
+        "B": 11.0,
+        "C": 7.0
+      },
+      "missed": 0,
+      "makespan": 52,
+      "weighted_arrival": 446.0,
+      "late": 0,
+      "rows": [
+        {
+          "hub": "C",
+          "drone": "UAV 1",
+          "start": 0,
+          "arrival": 7.0,
+          "finish": 14,
+          "load": 5.0,
+          "first": true,
+          "deadline": 10,
+          "late": 0
+        },
+        {
+          "hub": "A",
+          "drone": "UAV 2",
+          "start": 0,
+          "arrival": 3.0,
+          "finish": 6,
+          "load": 5.0,
+          "first": true,
+          "deadline": 15,
+          "late": 0
+        },
+        {
+          "hub": "B",
+          "drone": "UAV 2",
+          "start": 6,
+          "arrival": 11.0,
+          "finish": 16,
+          "load": 5.0,
+          "first": true,
+          "deadline": 25,
+          "late": 0
+        },
+        {
+          "hub": "C",
+          "drone": "UAV 1",
+          "start": 14,
+          "arrival": 21.0,
+          "finish": 28,
+          "load": 5.0,
+          "first": false,
+          "deadline": 10,
+          "late": 0
+        },
+        {
+          "hub": "A",
+          "drone": "UAV 2",
+          "start": 16,
+          "arrival": 19.0,
+          "finish": 22,
+          "load": 5.0,
+          "first": false,
+          "deadline": 15,
+          "late": 0
+        },
+        {
+          "hub": "A",
+          "drone": "UAV 2",
+          "start": 22,
+          "arrival": 25.0,
+          "finish": 28,
+          "load": 3.09,
+          "first": false,
+          "deadline": 15,
+          "late": 0
+        },
+        {
+          "hub": "C",
+          "drone": "UAV 1",
+          "start": 28,
+          "arrival": 35.0,
+          "finish": 42,
+          "load": 5.0,
+          "first": false,
+          "deadline": 10,
+          "late": 0
+        },
+        {
+          "hub": "C",
+          "drone": "UAV 2",
+          "start": 28,
+          "arrival": 35.0,
+          "finish": 42,
+          "load": 3.18,
+          "first": false,
+          "deadline": 10,
+          "late": 0
+        },
+        {
+          "hub": "B",
+          "drone": "UAV 1",
+          "start": 42,
+          "arrival": 47.0,
+          "finish": 52,
+          "load": 3.73,
+          "first": false,
+          "deadline": 25,
+          "late": 0
+        }
+      ],
+      "sequence": "CABCAACCB"
+    }
+  },
+  "QLearning": {
+    "score": -441.0,
+    "first": {
+      "A": 3.0,
+      "B": 25.0,
+      "C": 7.0
+    },
+    "missed": 0,
+    "makespan": 50,
+    "weighted_arrival": 416.0,
+    "late": 0,
+    "rows": [
+      {
+        "hub": "A",
+        "drone": "UAV 1",
+        "start": 0,
+        "arrival": 3.0,
+        "finish": 6,
+        "load": 5.0,
+        "first": true,
+        "deadline": 15,
+        "late": 0
+      },
+      {
+        "hub": "C",
+        "drone": "UAV 2",
+        "start": 0,
+        "arrival": 7.0,
+        "finish": 14,
+        "load": 5.0,
+        "first": true,
+        "deadline": 10,
+        "late": 0
+      },
+      {
+        "hub": "A",
+        "drone": "UAV 1",
+        "start": 6,
+        "arrival": 9.0,
+        "finish": 12,
+        "load": 5.0,
+        "first": false,
+        "deadline": 15,
+        "late": 0
+      },
+      {
+        "hub": "C",
+        "drone": "UAV 1",
+        "start": 12,
+        "arrival": 19.0,
+        "finish": 26,
+        "load": 5.0,
+        "first": false,
+        "deadline": 10,
+        "late": 0
+      },
+      {
+        "hub": "A",
+        "drone": "UAV 2",
+        "start": 14,
+        "arrival": 17.0,
+        "finish": 20,
+        "load": 3.09,
+        "first": false,
+        "deadline": 15,
+        "late": 0
+      },
+      {
+        "hub": "B",
+        "drone": "UAV 2",
+        "start": 20,
+        "arrival": 25.0,
+        "finish": 30,
+        "load": 5.0,
+        "first": true,
+        "deadline": 25,
+        "late": 0
+      },
+      {
+        "hub": "C",
+        "drone": "UAV 1",
+        "start": 26,
+        "arrival": 33.0,
+        "finish": 40,
+        "load": 5.0,
+        "first": false,
+        "deadline": 10,
+        "late": 0
+      },
+      {
+        "hub": "C",
+        "drone": "UAV 2",
+        "start": 30,
+        "arrival": 37.0,
+        "finish": 44,
+        "load": 3.18,
+        "first": false,
+        "deadline": 10,
+        "late": 0
+      },
+      {
+        "hub": "B",
+        "drone": "UAV 1",
+        "start": 40,
+        "arrival": 45.0,
+        "finish": 50,
+        "load": 3.73,
+        "first": false,
+        "deadline": 25,
+        "late": 0
+      }
+    ],
+    "sequence": "ACACABCCB"
+  },
+  "ExactSearchReference": {
+    "score": -441.0,
+    "first": {
+      "A": 3.0,
+      "B": 25.0,
+      "C": 7.0
+    },
+    "missed": 0,
+    "makespan": 50,
+    "weighted_arrival": 416.0,
+    "late": 0,
+    "rows": [
+      {
+        "hub": "C",
+        "drone": "UAV 1",
+        "start": 0,
+        "arrival": 7.0,
+        "finish": 14,
+        "load": 5.0,
+        "first": true,
+        "deadline": 10,
+        "late": 0
+      },
+      {
+        "hub": "A",
+        "drone": "UAV 2",
+        "start": 0,
+        "arrival": 3.0,
+        "finish": 6,
+        "load": 5.0,
+        "first": true,
+        "deadline": 15,
+        "late": 0
+      },
+      {
+        "hub": "A",
+        "drone": "UAV 2",
+        "start": 6,
+        "arrival": 9.0,
+        "finish": 12,
+        "load": 5.0,
+        "first": false,
+        "deadline": 15,
+        "late": 0
+      },
+      {
+        "hub": "C",
+        "drone": "UAV 2",
+        "start": 12,
+        "arrival": 19.0,
+        "finish": 26,
+        "load": 5.0,
+        "first": false,
+        "deadline": 10,
+        "late": 0
+      },
+      {
+        "hub": "A",
+        "drone": "UAV 1",
+        "start": 14,
+        "arrival": 17.0,
+        "finish": 20,
+        "load": 3.09,
+        "first": false,
+        "deadline": 15,
+        "late": 0
+      },
+      {
+        "hub": "B",
+        "drone": "UAV 1",
+        "start": 20,
+        "arrival": 25.0,
+        "finish": 30,
+        "load": 5.0,
+        "first": true,
+        "deadline": 25,
+        "late": 0
+      },
+      {
+        "hub": "C",
+        "drone": "UAV 2",
+        "start": 26,
+        "arrival": 33.0,
+        "finish": 40,
+        "load": 5.0,
+        "first": false,
+        "deadline": 10,
+        "late": 0
+      },
+      {
+        "hub": "C",
+        "drone": "UAV 1",
+        "start": 30,
+        "arrival": 37.0,
+        "finish": 44,
+        "load": 3.18,
+        "first": false,
+        "deadline": 10,
+        "late": 0
+      },
+      {
+        "hub": "B",
+        "drone": "UAV 2",
+        "start": 40,
+        "arrival": 45.0,
+        "finish": 50,
+        "load": 3.73,
+        "first": false,
+        "deadline": 25,
+        "late": 0
+      }
+    ],
+    "sequence": "CAACABCCB"
+  },
+  "learning": [
+    {
+      "episode": 500,
+      "score": -462.0,
+      "missed": 0,
+      "makespan": 48
+    },
+    {
+      "episode": 1000,
+      "score": -446.0,
+      "missed": 0,
+      "makespan": 48
+    },
+    {
+      "episode": 1500,
+      "score": -468.0,
+      "missed": 0,
+      "makespan": 52
+    },
+    {
+      "episode": 2000,
+      "score": -468.0,
+      "missed": 0,
+      "makespan": 52
+    },
+    {
+      "episode": 2500,
+      "score": -441.0,
+      "missed": 0,
+      "makespan": 50
+    },
+    {
+      "episode": 3000,
+      "score": -441.0,
+      "missed": 0,
+      "makespan": 50
+    },
+    {
+      "episode": 3500,
+      "score": -441.0,
+      "missed": 0,
+      "makespan": 50
+    },
+    {
+      "episode": 4000,
+      "score": -441.0,
+      "missed": 0,
+      "makespan": 50
+    },
+    {
+      "episode": 4500,
+      "score": -441.0,
+      "missed": 0,
+      "makespan": 50
+    },
+    {
+      "episode": 5000,
+      "score": -441.0,
+      "missed": 0,
+      "makespan": 50
+    },
+    {
+      "episode": 5500,
+      "score": -441.0,
+      "missed": 0,
+      "makespan": 50
+    },
+    {
+      "episode": 6000,
+      "score": -441.0,
+      "missed": 0,
+      "makespan": 50
+    },
+    {
+      "episode": 6500,
+      "score": -441.0,
+      "missed": 0,
+      "makespan": 50
+    },
+    {
+      "episode": 7000,
+      "score": -441.0,
+      "missed": 0,
+      "makespan": 50
+    },
+    {
+      "episode": 7500,
+      "score": -441.0,
+      "missed": 0,
+      "makespan": 50
+    },
+    {
+      "episode": 8000,
+      "score": -441.0,
+      "missed": 0,
+      "makespan": 50
+    },
+    {
+      "episode": 8500,
+      "score": -441.0,
+      "missed": 0,
+      "makespan": 50
+    },
+    {
+      "episode": 9000,
+      "score": -441.0,
+      "missed": 0,
+      "makespan": 50
+    },
+    {
+      "episode": 9500,
+      "score": -441.0,
+      "missed": 0,
+      "makespan": 50
+    },
+    {
+      "episode": 10000,
+      "score": -441.0,
+      "missed": 0,
+      "makespan": 50
+    },
+    {
+      "episode": 10500,
+      "score": -441.0,
+      "missed": 0,
+      "makespan": 50
+    },
+    {
+      "episode": 11000,
+      "score": -441.0,
+      "missed": 0,
+      "makespan": 50
+    },
+    {
+      "episode": 11500,
+      "score": -441.0,
+      "missed": 0,
+      "makespan": 50
+    },
+    {
+      "episode": 12000,
+      "score": -441.0,
+      "missed": 0,
+      "makespan": 50
+    },
+    {
+      "episode": 12500,
+      "score": -441.0,
+      "missed": 0,
+      "makespan": 50
+    },
+    {
+      "episode": 13000,
+      "score": -441.0,
+      "missed": 0,
+      "makespan": 50
+    },
+    {
+      "episode": 13500,
+      "score": -441.0,
+      "missed": 0,
+      "makespan": 50
+    },
+    {
+      "episode": 14000,
+      "score": -441.0,
+      "missed": 0,
+      "makespan": 50
+    },
+    {
+      "episode": 14500,
+      "score": -441.0,
+      "missed": 0,
+      "makespan": 50
+    },
+    {
+      "episode": 15000,
+      "score": -441.0,
+      "missed": 0,
+      "makespan": 50
+    },
+    {
+      "episode": 15500,
+      "score": -441.0,
+      "missed": 0,
+      "makespan": 50
+    },
+    {
+      "episode": 16000,
+      "score": -441.0,
+      "missed": 0,
+      "makespan": 50
+    },
+    {
+      "episode": 16500,
+      "score": -441.0,
+      "missed": 0,
+      "makespan": 50
+    },
+    {
+      "episode": 17000,
+      "score": -441.0,
+      "missed": 0,
+      "makespan": 50
+    },
+    {
+      "episode": 17500,
+      "score": -441.0,
+      "missed": 0,
+      "makespan": 50
+    },
+    {
+      "episode": 18000,
+      "score": -441.0,
+      "missed": 0,
+      "makespan": 50
+    },
+    {
+      "episode": 18500,
+      "score": -441.0,
+      "missed": 0,
+      "makespan": 50
+    },
+    {
+      "episode": 19000,
+      "score": -441.0,
+      "missed": 0,
+      "makespan": 50
+    },
+    {
+      "episode": 19500,
+      "score": -441.0,
+      "missed": 0,
+      "makespan": 50
+    },
+    {
+      "episode": 20000,
+      "score": -441.0,
+      "missed": 0,
+      "makespan": 50
+    },
+    {
+      "episode": 20500,
+      "score": -441.0,
+      "missed": 0,
+      "makespan": 50
+    },
+    {
+      "episode": 21000,
+      "score": -441.0,
+      "missed": 0,
+      "makespan": 50
+    },
+    {
+      "episode": 21500,
+      "score": -441.0,
+      "missed": 0,
+      "makespan": 50
+    },
+    {
+      "episode": 22000,
+      "score": -441.0,
+      "missed": 0,
+      "makespan": 50
+    },
+    {
+      "episode": 22500,
+      "score": -441.0,
+      "missed": 0,
+      "makespan": 50
+    },
+    {
+      "episode": 23000,
+      "score": -441.0,
+      "missed": 0,
+      "makespan": 50
+    },
+    {
+      "episode": 23500,
+      "score": -441.0,
+      "missed": 0,
+      "makespan": 50
+    },
+    {
+      "episode": 24000,
+      "score": -441.0,
+      "missed": 0,
+      "makespan": 50
+    },
+    {
+      "episode": 24500,
+      "score": -441.0,
+      "missed": 0,
+      "makespan": 50
+    },
+    {
+      "episode": 25000,
+      "score": -441.0,
+      "missed": 0,
+      "makespan": 50
+    },
+    {
+      "episode": 25500,
+      "score": -441.0,
+      "missed": 0,
+      "makespan": 50
+    },
+    {
+      "episode": 26000,
+      "score": -441.0,
+      "missed": 0,
+      "makespan": 50
+    },
+    {
+      "episode": 26500,
+      "score": -441.0,
+      "missed": 0,
+      "makespan": 50
+    },
+    {
+      "episode": 27000,
+      "score": -441.0,
+      "missed": 0,
+      "makespan": 50
+    },
+    {
+      "episode": 27500,
+      "score": -441.0,
+      "missed": 0,
+      "makespan": 50
+    },
+    {
+      "episode": 28000,
+      "score": -441.0,
+      "missed": 0,
+      "makespan": 50
+    },
+    {
+      "episode": 28500,
+      "score": -441.0,
+      "missed": 0,
+      "makespan": 50
+    },
+    {
+      "episode": 29000,
+      "score": -441.0,
+      "missed": 0,
+      "makespan": 50
+    },
+    {
+      "episode": 29500,
+      "score": -441.0,
+      "missed": 0,
+      "makespan": 50
+    },
+    {
+      "episode": 30000,
+      "score": -441.0,
+      "missed": 0,
+      "makespan": 50
+    }
+  ],
+  "training": {
+    "episodes": 30000,
+    "alpha": 0.25,
+    "gamma": 1.0,
+    "epsilon_start": 0.95,
+    "epsilon_min": 0.04,
+    "epsilon_decay": 0.99975,
+    "seed": 11
+  },
+  "full_sequences": 1260
+}

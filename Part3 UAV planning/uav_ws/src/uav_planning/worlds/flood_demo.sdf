@@ -1,0 +1,564 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  洪灾配送场景：Gazebo Harmonic / PX4 v1.16 / 官方 X500。
+  地图仍为原图的1/2，建筑最高14米；机体和动力学保持官方原尺寸。
+  新增6栋6x6米配送楼，P1/P4楼高5米，P2/P5楼高8米，P3/P6楼高12米。
+  P1/P2/P3 屋顶距绿色基地中心的三维直线距离按 1.5:2.5:3.5 布置。
+  单位为米和弧度，pose 顺序：x y z roll pitch yaw，世界 Z 向上。
+  地面和建筑有 collision；水面与任务标记只有 visual。
+  世界系统由 config/gazebo_server.config 提供，包含 PX4 所需传感器更新系统。
+  推荐从 takeoff_hold.launch.py 启动，它会配置模型路径、时钟和 PX4。
+-->
+<sdf version="1.9">
+  <world name="flood_demo">
+    <gravity>0 0 -9.81</gravity>
+    <physics name="default_physics" type="ignored">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+    </physics>
+
+    <!-- 用项目自带 server.config 加载世界系统，避免只有物理插件却缺失 IMU/GPS 更新。 -->
+    <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
+    <atmosphere type="adiabatic"/>
+    <!-- 沿用 PX4 官方世界的 WGS84 参考点，为 GPS 和地磁估计提供有效地理坐标。 -->
+    <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <world_frame_orientation>ENU</world_frame_orientation>
+      <latitude_deg>47.397971057728974</latitude_deg>
+      <longitude_deg>8.546163739800146</longitude_deg>
+      <elevation>0</elevation>
+    </spherical_coordinates>
+
+    <scene>
+      <ambient>0.55 0.55 0.55 1</ambient>
+      <background>0.78 0.87 0.95 1</background>
+      <shadows>true</shadows>
+    </scene>
+    <light name="sun" type="directional">
+      <pose>0 0 40 0 0 0</pose>
+      <cast_shadows>true</cast_shadows>
+      <diffuse>0.85 0.85 0.85 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <direction>-0.4 0.3 -0.9</direction>
+      <attenuation>
+        <range>500</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+    </light>
+
+    <!-- 初始视角俯瞰整张地图；不修改用户全局 GUI 配置。 -->
+    <gui fullscreen="0">
+      <plugin filename="MinimalScene" name="3D View">
+        <gz-gui>
+          <title>Flood delivery demo</title>
+          <property type="bool" key="showTitleBar">false</property>
+          <property type="string" key="state">docked</property>
+        </gz-gui>
+        <engine>ogre</engine>
+        <scene>scene</scene>
+        <ambient_light>0.55 0.55 0.55</ambient_light>
+        <background_color>0.78 0.87 0.95</background_color>
+        <camera_pose>50 -62.5 55 0 0.57 2.2455</camera_pose>
+        <camera_clip>
+          <near>0.05</near>
+          <far>500</far>
+        </camera_clip>
+      </plugin>
+      <plugin filename="GzSceneManager" name="Scene Manager">
+        <gz-gui>
+          <property key="state" type="string">floating</property>
+          <property key="width" type="double">5</property>
+          <property key="height" type="double">5</property>
+          <property key="showTitleBar" type="bool">false</property>
+        </gz-gui>
+      </plugin>
+      <!-- 在 MinimalScene 中绘制飞行路线使用的标记，不添加碰撞几何。 -->
+      <plugin filename="MarkerManager" name="Flight path markers">
+        <gz-gui>
+          <property key="state" type="string">floating</property>
+          <property key="width" type="double">5</property>
+          <property key="height" type="double">5</property>
+          <property key="showTitleBar" type="bool">false</property>
+        </gz-gui>
+      </plugin>
+      <plugin filename="InteractiveViewControl" name="Interactive view control">
+        <gz-gui>
+          <property key="state" type="string">floating</property>
+          <property key="width" type="double">5</property>
+          <property key="height" type="double">5</property>
+          <property key="showTitleBar" type="bool">false</property>
+        </gz-gui>
+      </plugin>
+      <plugin filename="SelectEntities" name="Select entities">
+        <gz-gui>
+          <property key="state" type="string">floating</property>
+          <property key="width" type="double">5</property>
+          <property key="height" type="double">5</property>
+          <property key="showTitleBar" type="bool">false</property>
+        </gz-gui>
+      </plugin>
+      <plugin filename="EntityTree" name="Entity tree"/>
+      <plugin filename="WorldControl" name="World control">
+        <gz-gui>
+          <title>World control</title>
+          <property type="bool" key="showTitleBar">false</property>
+          <property type="bool" key="resizable">false</property>
+          <property type="double" key="width">121</property>
+          <property type="double" key="height">72</property>
+          <property type="string" key="state">floating</property>
+          <anchors target="3D View">
+            <line own="left" target="left"/>
+            <line own="bottom" target="bottom"/>
+          </anchors>
+        </gz-gui>
+        <play_pause>true</play_pause>
+        <step>true</step>
+        <start_paused>false</start_paused>
+        <use_event>true</use_event>
+      </plugin>
+    </gui>
+
+    <!-- 地面范围：X=[-28.5,31.5]，Y=[-22.5,27.5]；顶面正好是 Z=0。 -->
+    <model name="ground">
+      <static>true</static>
+      <pose>1.5 2.5 -0.05 0 0 0</pose>
+      <link name="ground_link">
+        <collision name="ground_collision">
+          <geometry><box><size>60 50 0.1</size></box></geometry>
+        </collision>
+        <visual name="ground_visual">
+          <geometry><box><size>60 50 0.1</size></box></geometry>
+          <material>
+            <ambient>0.45 0.48 0.40 1</ambient>
+            <diffuse>0.62 0.65 0.55 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!--
+      蓝色水面由北侧和东侧两块组成，西南角留出 12×12 米的方形起降区：
+      X=[-28.5,-16.5]，Y=[-22.5,-10.5]。水面只有 visual，没有碰撞体。
+    -->
+    <model name="flood_area_visual_only">
+      <static>true</static>
+      <pose>0 0 0.02 0 0 0</pose>
+      <link name="water_marker">
+        <visual name="water_north">
+          <pose>1.5 8.5 0 0 0 0</pose>
+          <geometry><box><size>60 38 0.01</size></box></geometry>
+          <transparency>0.35</transparency>
+          <cast_shadows>false</cast_shadows>
+          <material>
+            <ambient>0.05 0.30 0.65 1</ambient>
+            <diffuse>0.08 0.45 0.90 1</diffuse>
+          </material>
+        </visual>
+        <visual name="water_east">
+          <pose>7.5 -16.5 0 0 0 0</pose>
+          <geometry><box><size>48 12 0.01</size></box></geometry>
+          <transparency>0.35</transparency>
+          <cast_shadows>false</cast_shadows>
+          <material>
+            <ambient>0.05 0.30 0.65 1</ambient>
+            <diffuse>0.08 0.45 0.90 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!--
+      建筑 B1：中心 (-16,-1)，长宽 5x12，高 6。
+      因为长方体默认以几何中心定位，Z=高度/2=3，底部才会落在地面。
+      修改建筑尺寸时，需要同步修改 visual、collision 和 pose 的 Z。
+    -->
+    <model name="building_B1_height_6m">
+      <static>true</static>
+      <pose>-16 -1 3 0 0 0</pose>
+      <link name="building_link">
+        <collision name="building_collision">
+          <geometry><box><size>5 12 6</size></box></geometry>
+        </collision>
+        <visual name="building_visual">
+          <geometry><box><size>5 12 6</size></box></geometry>
+          <material>
+            <ambient>0.45 0.45 0.48 1</ambient>
+            <diffuse>0.72 0.72 0.76 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- 建筑 B2：中心 (-3.5,4.5)，长宽 7x9，高 10。 -->
+    <model name="building_B2_height_10m">
+      <static>true</static>
+      <pose>-3.5 4.5 5 0 0 0</pose>
+      <link name="building_link">
+        <collision name="building_collision">
+          <geometry><box><size>7 9 10</size></box></geometry>
+        </collision>
+        <visual name="building_visual">
+          <geometry><box><size>7 9 10</size></box></geometry>
+          <material>
+            <ambient>0.45 0.40 0.33 1</ambient>
+            <diffuse>0.78 0.68 0.53 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- 建筑 B3：中心 (9.5,5.5)，长宽 6x8，高 14，为本例最高建筑。 -->
+    <model name="building_B3_height_14m">
+      <static>true</static>
+      <pose>9.5 5.5 7 0 0 0</pose>
+      <link name="building_link">
+        <collision name="building_collision">
+          <geometry><box><size>6 8 14</size></box></geometry>
+        </collision>
+        <visual name="building_visual">
+          <geometry><box><size>6 8 14</size></box></geometry>
+          <material>
+            <ambient>0.35 0.40 0.48 1</ambient>
+            <diffuse>0.58 0.68 0.82 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- 建筑 B4：中心 (6,-9.5)，长宽 9x5，高 8。 -->
+    <model name="building_B4_height_8m">
+      <static>true</static>
+      <pose>6 -9.5 4 0 0 0</pose>
+      <link name="building_link">
+        <collision name="building_collision">
+          <geometry><box><size>9 5 8</size></box></geometry>
+        </collision>
+        <visual name="building_visual">
+          <geometry><box><size>9 5 8</size></box></geometry>
+          <material>
+            <ambient>0.45 0.35 0.32 1</ambient>
+            <diffuse>0.80 0.60 0.50 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- 建筑 B5：中心 (-14,12)，长宽 5x4，高 4。 -->
+    <model name="building_B5_height_4m">
+      <static>true</static>
+      <pose>-14 12 2 0 0 0</pose>
+      <link name="building_link">
+        <collision name="building_collision">
+          <geometry><box><size>5 4 4</size></box></geometry>
+        </collision>
+        <visual name="building_visual">
+          <geometry><box><size>5 4 4</size></box></geometry>
+          <material>
+            <ambient>0.40 0.45 0.35 1</ambient>
+            <diffuse>0.68 0.78 0.57 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- P1配送楼：中心(-23,5.207)，底面6x6米，高5米；楼顶Z=5。 -->
+    <model name="building_P1_height_5m">
+      <static>true</static>
+      <pose>-23 5.207 2.5 0 0 0</pose>
+      <link name="building_link">
+        <collision name="building_collision">
+          <geometry><box><size>6 6 5</size></box></geometry>
+        </collision>
+        <visual name="building_visual">
+          <geometry><box><size>6 6 5</size></box></geometry>
+          <material>
+            <ambient>0.42 0.47 0.52 1</ambient>
+            <diffuse>0.67 0.75 0.83 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- P2配送楼：中心(-6,15.959)，底面6x6米，高8米；楼顶Z=8。 -->
+    <model name="building_P2_height_8m">
+      <static>true</static>
+      <pose>-6 15.959 4 0 0 0</pose>
+      <link name="building_link">
+        <collision name="building_collision">
+          <geometry><box><size>6 6 8</size></box></geometry>
+        </collision>
+        <visual name="building_visual">
+          <geometry><box><size>6 6 8</size></box></geometry>
+          <material>
+            <ambient>0.48 0.43 0.34 1</ambient>
+            <diffuse>0.81 0.73 0.57 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- P3配送楼：中心(16,17)，底面6x6米，高12米；楼顶Z=12。 -->
+    <model name="building_P3_height_12m">
+      <static>true</static>
+      <pose>16 17 6 0 0 0</pose>
+      <link name="building_link">
+        <collision name="building_collision">
+          <geometry><box><size>6 6 12</size></box></geometry>
+        </collision>
+        <visual name="building_visual">
+          <geometry><box><size>6 6 12</size></box></geometry>
+          <material>
+            <ambient>0.42 0.38 0.48 1</ambient>
+            <diffuse>0.72 0.64 0.82 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- P4配送楼：中心(24,4)，底面6x6米，高5米；楼顶Z=5。 -->
+    <model name="building_P4_height_5m">
+      <static>true</static>
+      <pose>24 4 2.5 0 0 0</pose>
+      <link name="building_link">
+        <collision name="building_collision">
+          <geometry><box><size>6 6 5</size></box></geometry>
+        </collision>
+        <visual name="building_visual">
+          <geometry><box><size>6 6 5</size></box></geometry>
+          <material>
+            <ambient>0.42 0.47 0.52 1</ambient>
+            <diffuse>0.67 0.75 0.83 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- P5配送楼：中心(21,-16)，底面6x6米，高8米；楼顶Z=8。 -->
+    <model name="building_P5_height_8m">
+      <static>true</static>
+      <pose>21 -16 4 0 0 0</pose>
+      <link name="building_link">
+        <collision name="building_collision">
+          <geometry><box><size>6 6 8</size></box></geometry>
+        </collision>
+        <visual name="building_visual">
+          <geometry><box><size>6 6 8</size></box></geometry>
+          <material>
+            <ambient>0.48 0.43 0.34 1</ambient>
+            <diffuse>0.81 0.73 0.57 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- P6配送楼：中心(4,-19)，底面6x6米，高12米；楼顶Z=12。 -->
+    <model name="building_P6_height_12m">
+      <static>true</static>
+      <pose>4 -19 6 0 0 0</pose>
+      <link name="building_link">
+        <collision name="building_collision">
+          <geometry><box><size>6 6 12</size></box></geometry>
+        </collision>
+        <visual name="building_visual">
+          <geometry><box><size>6 6 12</size></box></geometry>
+          <material>
+            <ambient>0.42 0.38 0.48 1</ambient>
+            <diffuse>0.72 0.64 0.82 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- A 基地：绿色圆盘，坐标 (-23,-17)；三个白色圆盘只是停机位置标记。 -->
+    <model name="A_base_visual_only">
+      <static>true</static>
+      <pose>-23 -17 0 0 0 0</pose>
+      <link name="base_markers">
+        <visual name="base_green_disc">
+          <pose>0 0 0.05 0 0 0</pose>
+          <geometry><cylinder><radius>2.25</radius><length>0.08</length></cylinder></geometry>
+          <material>
+            <ambient>0.05 0.45 0.10 1</ambient>
+            <diffuse>0.10 0.90 0.20 1</diffuse>
+          </material>
+        </visual>
+        <visual name="uav_1_spawn_marker">
+          <pose>-1 -1 0.105 0 0 0</pose>
+          <geometry><cylinder><radius>0.5</radius><length>0.02</length></cylinder></geometry>
+          <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+        </visual>
+        <visual name="uav_2_spawn_marker">
+          <pose>1 -1 0.105 0 0 0</pose>
+          <geometry><cylinder><radius>0.5</radius><length>0.02</length></cylinder></geometry>
+          <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+        </visual>
+        <visual name="uav_3_spawn_marker">
+          <pose>0 1 0.105 0 0 0</pose>
+          <geometry><cylinder><radius>0.5</radius><length>0.02</length></cylinder></geometry>
+          <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <!--
+      P1-P6：标记模型的Z等于对应楼顶高度；P7仍在地面。
+      橙色圆盘和半径0.10米的黄色小球只有visual，不参与碰撞。
+      飞行访问点取楼顶上方2米，小球中心不是飞行高度指令。
+      模型名可在 Entity tree 中查看；本文件没有额外的 3D 文字贴图。
+    -->
+    <model name="target_P1">
+      <static>true</static>
+      <pose>-23 5.207 5 0 0 0</pose>
+      <link name="target_marker">
+        <visual name="orange_disc">
+          <pose>0 0 0.08 0 0 0</pose>
+          <geometry><cylinder><radius>0.9</radius><length>0.06</length></cylinder></geometry>
+          <material><ambient>0.8 0.3 0 1</ambient><diffuse>1 0.45 0.02 1</diffuse></material>
+        </visual>
+        <visual name="yellow_beacon">
+          <pose>0 0 0.25 0 0 0</pose>
+          <geometry><sphere><radius>0.10</radius></sphere></geometry>
+          <material><ambient>0.9 0.8 0 1</ambient><diffuse>1 0.9 0.05 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="target_P2">
+      <static>true</static>
+      <pose>-6 15.959 8 0 0 0</pose>
+      <link name="target_marker">
+        <visual name="orange_disc">
+          <pose>0 0 0.08 0 0 0</pose>
+          <geometry><cylinder><radius>0.9</radius><length>0.06</length></cylinder></geometry>
+          <material><ambient>0.8 0.3 0 1</ambient><diffuse>1 0.45 0.02 1</diffuse></material>
+        </visual>
+        <visual name="yellow_beacon">
+          <pose>0 0 0.25 0 0 0</pose>
+          <geometry><sphere><radius>0.10</radius></sphere></geometry>
+          <material><ambient>0.9 0.8 0 1</ambient><diffuse>1 0.9 0.05 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="target_P3">
+      <static>true</static>
+      <pose>16 17 12 0 0 0</pose>
+      <link name="target_marker">
+        <visual name="orange_disc">
+          <pose>0 0 0.08 0 0 0</pose>
+          <geometry><cylinder><radius>0.9</radius><length>0.06</length></cylinder></geometry>
+          <material><ambient>0.8 0.3 0 1</ambient><diffuse>1 0.45 0.02 1</diffuse></material>
+        </visual>
+        <visual name="yellow_beacon">
+          <pose>0 0 0.25 0 0 0</pose>
+          <geometry><sphere><radius>0.10</radius></sphere></geometry>
+          <material><ambient>0.9 0.8 0 1</ambient><diffuse>1 0.9 0.05 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="target_P4">
+      <static>true</static>
+      <pose>24 4 5 0 0 0</pose>
+      <link name="target_marker">
+        <visual name="orange_disc">
+          <pose>0 0 0.08 0 0 0</pose>
+          <geometry><cylinder><radius>0.9</radius><length>0.06</length></cylinder></geometry>
+          <material><ambient>0.8 0.3 0 1</ambient><diffuse>1 0.45 0.02 1</diffuse></material>
+        </visual>
+        <visual name="yellow_beacon">
+          <pose>0 0 0.25 0 0 0</pose>
+          <geometry><sphere><radius>0.10</radius></sphere></geometry>
+          <material><ambient>0.9 0.8 0 1</ambient><diffuse>1 0.9 0.05 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="target_P5">
+      <static>true</static>
+      <pose>21 -16 8 0 0 0</pose>
+      <link name="target_marker">
+        <visual name="orange_disc">
+          <pose>0 0 0.08 0 0 0</pose>
+          <geometry><cylinder><radius>0.9</radius><length>0.06</length></cylinder></geometry>
+          <material><ambient>0.8 0.3 0 1</ambient><diffuse>1 0.45 0.02 1</diffuse></material>
+        </visual>
+        <visual name="yellow_beacon">
+          <pose>0 0 0.25 0 0 0</pose>
+          <geometry><sphere><radius>0.10</radius></sphere></geometry>
+          <material><ambient>0.9 0.8 0 1</ambient><diffuse>1 0.9 0.05 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="target_P6">
+      <static>true</static>
+      <pose>4 -19 12 0 0 0</pose>
+      <link name="target_marker">
+        <visual name="orange_disc">
+          <pose>0 0 0.08 0 0 0</pose>
+          <geometry><cylinder><radius>0.9</radius><length>0.06</length></cylinder></geometry>
+          <material><ambient>0.8 0.3 0 1</ambient><diffuse>1 0.45 0.02 1</diffuse></material>
+        </visual>
+        <visual name="yellow_beacon">
+          <pose>0 0 0.25 0 0 0</pose>
+          <geometry><sphere><radius>0.10</radius></sphere></geometry>
+          <material><ambient>0.9 0.8 0 1</ambient><diffuse>1 0.9 0.05 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="target_P7">
+      <static>true</static>
+      <pose>-10 0 0 0 0 0</pose>
+      <link name="target_marker">
+        <visual name="orange_disc">
+          <pose>0 0 0.08 0 0 0</pose>
+          <geometry><cylinder><radius>0.9</radius><length>0.06</length></cylinder></geometry>
+          <material><ambient>0.8 0.3 0 1</ambient><diffuse>1 0.45 0.02 1</diffuse></material>
+        </visual>
+        <visual name="yellow_beacon">
+          <pose>0 0 0.25 0 0 0</pose>
+          <geometry><sphere><radius>0.10</radius></sphere></geometry>
+          <material><ambient>0.9 0.8 0 1</ambient><diffuse>1 0.9 0.05 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+    <!--
+      官方 X500：四个电机和传感器由 PX4 官方模型提供；电机指令来自 PX4。
+      PX4 通过 PX4_GZ_MODEL_NAME=x500_0 连接 S1 上已存在的模型。
+      原点落在第一个停机位上方，模型名称区分大小写。
+    -->
+    <include>
+      <name>x500_0</name>
+      <pose>-24 -18 0.3 0 0 0</pose>
+      <uri>model://x500</uri>
+      <!-- 仅供记录/验收的世界坐标真值，不参与 Offboard 位置控制。 -->
+      <plugin filename="gz-sim-odometry-publisher-system"
+        name="gz::sim::systems::OdometryPublisher">
+        <dimensions>3</dimensions>
+        <odom_topic>/model/x500_0/odometry</odom_topic>
+        <odom_frame>map</odom_frame>
+        <robot_base_frame>x500_0/base_link</robot_base_frame>
+        <odom_publish_frequency>30</odom_publish_frequency>
+      </plugin>
+    </include>
+
+    <!-- S2；双机启动时 PX4 instance 1 连接此模型。 -->
+    <include>
+      <name>x500_1</name>
+      <pose>-22 -18 0.3 0 0 0</pose>
+      <uri>model://x500</uri>
+      <plugin filename="gz-sim-odometry-publisher-system"
+        name="gz::sim::systems::OdometryPublisher">
+        <dimensions>3</dimensions>
+        <odom_topic>/model/x500_1/odometry</odom_topic>
+        <odom_frame>map</odom_frame>
+        <robot_base_frame>x500_1/base_link</robot_base_frame>
+        <odom_publish_frequency>30</odom_publish_frequency>
+      </plugin>
+    </include>
+  </world>
+</sdf>

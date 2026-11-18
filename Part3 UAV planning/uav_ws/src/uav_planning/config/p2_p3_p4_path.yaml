@@ -1,0 +1,18 @@
+# nav_msgs/msg/Path任务访问点；发到/uav/mission，A*成功输出后自动起飞。
+# map为ENU绝对坐标，单位米；只约束P2→P3→P4顺序和访问高度。
+# 不设16米中转层，段间的绕行/爬升/下降航点由三维A*生成。
+header:
+  frame_id: map
+poses:
+  # P2：楼顶8米，访问高度10米；停稳后继续，不降落。
+  - pose:
+      position: {x: -6.0, y: 15.959, z: 10.0}
+      orientation: {w: 1.0}
+  # P3：楼顶12米，访问高度14米；停稳后继续，不降落。
+  - pose:
+      position: {x: 16.0, y: 17.0, z: 14.0}
+      orientation: {w: 1.0}
+  # P4：楼顶5米，访问高度7米；最后交给PX4在楼顶降落。
+  - pose:
+      position: {x: 24.0, y: 4.0, z: 7.0}
+      orientation: {w: 1.0}

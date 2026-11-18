@@ -1,0 +1,189 @@
+[mission_dispatcher_node-4]  [1794889733.853708216] [mission_dispatcher_node]: 收到分配结果 9 单（#1–#9）：1A2C1A1C2A2B1C2C1B。
+[mission_dispatcher_node-4]  [1794889733.859751447] [mission_dispatcher_node]: 派单 #1 给 UAV1：S1 → A → S1；待派 8 单。
+[mission_dispatcher_node-4]  [1794889733.859854589] [mission_dispatcher_node]: 派单 #2 给 UAV2：S2 → C → S2；待派 7 单。
+[planner_node-7]  [1794889733.893726825] [uav1.planner_node]: A*第1/2段：扩展3643格，原始49点，简化后3点。
+[planner_node-7]  [1794889733.925027577] [uav1.planner_node]: A*第2/2段：扩展3157格，原始48点，简化后3点。
+[planner_node-7]  [1794889733.925128706] [uav1.planner_node]: 规划完成：保留2个关键点，输出4个执行航点，扩展6800格，耗时63.4 ms。
+[goto_point_hover_node-6]  [1794889733.926288164] [uav1.goto_point_node]: 接收map路径：4个航点，准备自动起飞；只在最后一个点保持或降落。
+[goto_point_hover_node-6]  [1794889733.973335632] [uav1.goto_point_node]: 先预发2秒心跳，再请求Offboard/解锁；相对起飞 2.00 m。
+[flight_path_overlay-12]  [1794889734.177718391] [flight_path_overlay]: Sent uav1 planned path to Gazebo (5 points).
+[planner_node-10]  [1794889734.458798605] [uav2.planner_node]: A*第1/2段：扩展33784格，原始78点，简化后4点。
+[planner_node-10]  [1794889734.775020091] [uav2.planner_node]: A*第2/2段：扩展24358格，原始77点，简化后5点。
+[planner_node-10]  [1794889734.775131449] [uav2.planner_node]: 规划完成：保留2个关键点，输出7个执行航点，扩展58142格，耗时740.4 ms。
+[goto_point_hover_node-9]  [1794889734.776183116] [uav2.goto_point_node]: 接收map路径：7个航点，准备自动起飞；只在最后一个点保持或降落。
+[goto_point_hover_node-9]  [1794889734.802889551] [uav2.goto_point_node]: 先预发2秒心跳，再请求Offboard/解锁；相对起飞 2.00 m。
+[flight_path_overlay-12]  [1794889734.927246591] [flight_path_overlay]: Sent uav2 planned path to Gazebo (8 points).
+[goto_point_hover_node-6]  [1794889736.672670910] [uav1.goto_point_node]: 命令回执：command=176, result=0；最终以状态反馈为准。
+[goto_point_hover_node-9]  [1794889737.354278556] [uav2.goto_point_node]: 命令回执：command=176, result=0；最终以状态反馈为准。
+[px4_uav1-5] INFO  [commander] Armed by external command
+[px4_uav1-5] INFO  [tone_alarm] arming warning
+[goto_point_hover_node-6]  [1794889737.833496708] [uav1.goto_point_node]: 命令回执：command=400, result=0；最终以状态反馈为准。
+[goto_point_hover_node-6]  [1794889737.877778269] [uav1.goto_point_node]: PX4已确认Offboard和解锁，开始垂直起飞。
+[px4_uav2-8] INFO  [commander] Armed by external command
+[px4_uav2-8] INFO  [tone_alarm] arming warning
+[goto_point_hover_node-9]  [1794889738.526080874] [uav2.goto_point_node]: 命令回执：command=400, result=0；最终以状态反馈为准。
+[goto_point_hover_node-9]  [1794889738.577434512] [uav2.goto_point_node]: PX4已确认Offboard和解锁，开始垂直起飞。
+[px4_uav1-5] INFO  [commander] Takeoff detected
+[px4_uav2-8] INFO  [commander] Takeoff detected
+[goto_point_hover_node-6]  [1794889752.340286126] [uav1.goto_point_node]: 离地引导已稳定，继续升至指定起飞高度。
+[goto_point_hover_node-9]  [1794889752.907676981] [uav2.goto_point_node]: 离地引导已稳定，继续升至指定起飞高度。
+[goto_point_hover_node-6]  [1794889759.233880823] [uav1.goto_point_node]: 开始航点1/4：(-23.000, 1.000, 7.000) m。
+[goto_point_hover_node-9]  [1794889759.758048690] [uav2.goto_point_node]: 开始航点1/7：(2.500, 5.000, 16.000) m。
+[goto_point_hover_node-6]  [1794889777.118670915] [uav1.goto_point_node]: 航点1/4已到达并稳定0.5秒。
+[goto_point_hover_node-6]  [1794889777.118830873] [uav1.goto_point_node]: 开始航点2/4：(-23.000, 5.207, 7.000) m。
+[goto_point_hover_node-6]  [1794889785.016866782] [uav1.goto_point_node]: 航点2/4已到达并稳定0.5秒。
+[goto_point_hover_node-6]  [1794889785.016982137] [uav1.goto_point_node]: 开始航点3/4：(-23.000, -11.000, 6.500) m。
+[goto_point_hover_node-9]  [1794889788.012877186] [uav2.goto_point_node]: 航点1/7已到达并稳定0.5秒。
+[goto_point_hover_node-9]  [1794889788.013161266] [uav2.goto_point_node]: 开始航点2/7：(11.500, 14.000, 16.000) m。
+[goto_point_hover_node-9]  [1794889801.564407035] [uav2.goto_point_node]: 航点2/7已到达并稳定0.5秒。
+[goto_point_hover_node-9]  [1794889801.564682819] [uav2.goto_point_node]: 开始航点3/7：(16.000, 17.000, 14.000) m。
+[goto_point_hover_node-6]  [1794889802.254040785] [uav1.goto_point_node]: 航点3/4已到达并稳定0.5秒。
+[goto_point_hover_node-6]  [1794889802.254140441] [uav1.goto_point_node]: 开始航点4/4：(-24.000, -18.000, 2.000) m。
+[goto_point_hover_node-9]  [1794889810.644007899] [uav2.goto_point_node]: 航点3/7已到达并稳定0.5秒。
+[goto_point_hover_node-9]  [1794889810.644275218] [uav2.goto_point_node]: 开始航点4/7：(9.500, 10.500, 16.000) m。
+[goto_point_hover_node-6]  [1794889813.001937118] [uav1.goto_point_node]: 航点4/4已到达并稳定0.5秒。
+[goto_point_hover_node-6]  [1794889813.002261662] [uav1.goto_point_node]: 已返航并稳定悬停，保持Offboard。
+[mission_dispatcher_node-4]  [1794889813.002348189] [mission_dispatcher_node]: UAV1 完成 #1，已回到 S1。已返航并稳定悬停，保持Offboard。
+[mission_dispatcher_node-4]  [1794889813.126097851] [mission_dispatcher_node]: 派单 #3 给 UAV1：S1 → A → S1；待派 6 单。
+[planner_node-7]  [1794889813.340324317] [uav1.planner_node]: A*第1/2段：扩展3643格，原始48点，简化后3点。
+[planner_node-7]  [1794889813.361494637] [uav1.planner_node]: A*第2/2段：扩展3157格，原始48点，简化后3点。
+[planner_node-7]  [1794889813.361611475] [uav1.planner_node]: 规划完成：保留2个关键点，输出4个执行航点，扩展6800格，耗时43.7 ms。
+[goto_point_hover_node-6]  [1794889813.362149417] [uav1.goto_point_node]: 接收map路径：4个航点，准备自动起飞；只在最后一个点保持或降落。
+[goto_point_hover_node-6]  [1794889813.372895642] [uav1.goto_point_node]: 开始航点1/4：(-23.000, 1.000, 7.000) m。
+[flight_path_overlay-12]  [1794889813.427080301] [flight_path_overlay]: Sent uav1 planned path to Gazebo (5 points).
+[goto_point_hover_node-9]  [1794889821.982116698] [uav2.goto_point_node]: 航点4/7已到达并稳定0.5秒。
+[goto_point_hover_node-9]  [1794889821.982326125] [uav2.goto_point_node]: 开始航点5/7：(4.500, 5.500, 16.000) m。
+[goto_point_hover_node-6]  [1794889831.003190015] [uav1.goto_point_node]: 航点1/4已到达并稳定0.5秒。
+[goto_point_hover_node-6]  [1794889831.003291334] [uav1.goto_point_node]: 开始航点2/4：(-23.000, 5.207, 7.000) m。
+[goto_point_hover_node-9]  [1794889831.808452229] [uav2.goto_point_node]: 航点5/7已到达并稳定0.5秒。
+[goto_point_hover_node-9]  [1794889831.808640240] [uav2.goto_point_node]: 开始航点6/7：(-20.000, -17.000, 3.000) m。
+[goto_point_hover_node-6]  [1794889838.773207055] [uav1.goto_point_node]: 航点2/4已到达并稳定0.5秒。
+[goto_point_hover_node-6]  [1794889838.773349260] [uav1.goto_point_node]: 开始航点3/4：(-23.000, -11.000, 6.500) m。
+[goto_point_hover_node-6]  [1794889854.237141799] [uav1.goto_point_node]: 航点3/4已到达并稳定0.5秒。
+[goto_point_hover_node-6]  [1794889854.237248849] [uav1.goto_point_node]: 开始航点4/4：(-24.000, -18.000, 2.000) m。
+[goto_point_hover_node-9]  [1794889859.353132108] [uav2.goto_point_node]: 航点6/7已到达并稳定0.5秒。
+[goto_point_hover_node-9]  [1794889859.353284462] [uav2.goto_point_node]: 开始航点7/7：(-22.000, -18.000, 2.000) m。
+[goto_point_hover_node-6]  [1794889865.013202239] [uav1.goto_point_node]: 航点4/4已到达并稳定0.5秒。
+[goto_point_hover_node-6]  [1794889865.013463497] [uav1.goto_point_node]: 已返航并稳定悬停，保持Offboard。
+[mission_dispatcher_node-4]  [1794889865.013511881] [mission_dispatcher_node]: UAV1 完成 #3，已回到 S1。已返航并稳定悬停，保持Offboard。
+[mission_dispatcher_node-4]  [1794889865.084355259] [mission_dispatcher_node]: 派单 #4 给 UAV1：S1 → C → S1；待派 5 单。
+[goto_point_hover_node-9]  [1794889865.466016898] [uav2.goto_point_node]: 航点7/7已到达并稳定0.5秒。
+[goto_point_hover_node-9]  [1794889865.466212964] [uav2.goto_point_node]: 已返航并稳定悬停，保持Offboard。
+[mission_dispatcher_node-4]  [1794889865.466335863] [mission_dispatcher_node]: UAV2 完成 #2，已回到 S2。已返航并稳定悬停，保持Offboard。
+[mission_dispatcher_node-4]  [1794889865.610875238] [mission_dispatcher_node]: 派单 #5 给 UAV2：S2 → A → S2；待派 4 单。
+[planner_node-7]  [1794889865.765514173] [uav1.planner_node]: A*第1/2段：扩展32428格，原始83点，简化后4点。
+[planner_node-10]  [1794889865.848970731] [uav2.planner_node]: A*第1/2段：扩展3693格，原始48点，简化后3点。
+[planner_node-10]  [1794889865.880199103] [uav2.planner_node]: A*第2/2段：扩展3091格，原始48点，简化后3点。
+[planner_node-10]  [1794889865.880379580] [uav2.planner_node]: 规划完成：保留2个关键点，输出4个执行航点，扩展6784格，耗时59.0 ms。
+[goto_point_hover_node-9]  [1794889865.880978798] [uav2.goto_point_node]: 接收map路径：4个航点，准备自动起飞；只在最后一个点保持或降落。
+[goto_point_hover_node-9]  [1794889865.894692041] [uav2.goto_point_node]: 开始航点1/4：(-23.000, 1.000, 7.000) m。
+[flight_path_overlay-12]  [1794889865.927379954] [flight_path_overlay]: Sent uav2 planned path to Gazebo (5 points).
+[planner_node-7]  [1794889866.118433906] [uav1.planner_node]: A*第2/2段：扩展23819格，原始83点，简化后4点。
+[planner_node-7]  [1794889866.119102824] [uav1.planner_node]: 规划完成：保留2个关键点，输出6个执行航点，扩展56247格，耗时783.1 ms。
+[goto_point_hover_node-6]  [1794889866.119915180] [uav1.goto_point_node]: 接收map路径：6个航点，准备自动起飞；只在最后一个点保持或降落。
+[goto_point_hover_node-6]  [1794889866.161635294] [uav1.goto_point_node]: 开始航点1/6：(-8.000, -2.000, 12.000) m。
+[flight_path_overlay-12]  [1794889866.177237061] [flight_path_overlay]: Sent uav1 planned path to Gazebo (7 points).
+[goto_point_hover_node-9]  [1794889883.841523091] [uav2.goto_point_node]: 航点1/4已到达并稳定0.5秒。
+[goto_point_hover_node-9]  [1794889883.841726781] [uav2.goto_point_node]: 开始航点2/4：(-23.000, 5.207, 7.000) m。
+[goto_point_hover_node-6]  [1794889887.328512639] [uav1.goto_point_node]: 航点1/6已到达并稳定0.5秒。
+[goto_point_hover_node-6]  [1794889887.328693146] [uav1.goto_point_node]: 开始航点2/6：(5.000, 12.000, 14.000) m。
+[goto_point_hover_node-9]  [1794889892.009821769] [uav2.goto_point_node]: 航点2/4已到达并稳定0.5秒。
+[goto_point_hover_node-9]  [1794889892.010019357] [uav2.goto_point_node]: 开始航点3/4：(-23.000, -11.000, 6.500) m。
+[goto_point_hover_node-6]  [1794889905.514875136] [uav1.goto_point_node]: 航点2/6已到达并稳定0.5秒。
+[goto_point_hover_node-6]  [1794889905.515121786] [uav1.goto_point_node]: 开始航点3/6：(16.000, 17.000, 14.000) m。
+[goto_point_hover_node-9]  [1794889908.032514443] [uav2.goto_point_node]: 航点3/4已到达并稳定0.5秒。
+[goto_point_hover_node-9]  [1794889908.032732725] [uav2.goto_point_node]: 开始航点4/4：(-22.000, -18.000, 2.000) m。
+[goto_point_hover_node-6]  [1794889918.818217195] [uav1.goto_point_node]: 航点3/6已到达并稳定0.5秒。
+[goto_point_hover_node-6]  [1794889918.818446532] [uav1.goto_point_node]: 开始航点4/6：(4.000, 11.000, 14.000) m。
+[goto_point_hover_node-9]  [1794889919.120955920] [uav2.goto_point_node]: 航点4/4已到达并稳定0.5秒。
+[goto_point_hover_node-9]  [1794889919.121204804] [uav2.goto_point_node]: 已返航并稳定悬停，保持Offboard。
+[mission_dispatcher_node-4]  [1794889919.121337005] [mission_dispatcher_node]: UAV2 完成 #5，已回到 S2。已返航并稳定悬停，保持Offboard。
+[mission_dispatcher_node-4]  [1794889919.187026367] [mission_dispatcher_node]: 派单 #6 给 UAV2：S2 → B → S2；待派 3 单。
+[planner_node-10]  [1794889919.629831431] [uav2.planner_node]: A*第1/2段：扩展22106格，原始70点，简化后4点。
+[planner_node-10]  [1794889919.815058810] [uav2.planner_node]: A*第2/2段：扩展19256格，原始70点，简化后4点。
+[planner_node-10]  [1794889919.815226773] [uav2.planner_node]: 规划完成：保留2个关键点，输出6个执行航点，扩展41362格，耗时377.9 ms。
+[goto_point_hover_node-9]  [1794889919.815890365] [uav2.goto_point_node]: 接收map路径：6个航点，准备自动起飞；只在最后一个点保持或降落。
+[goto_point_hover_node-9]  [1794889919.821641124] [uav2.goto_point_node]: 开始航点1/6：(-16.000, -8.500, 8.000) m。
+[flight_path_overlay-12]  [1794889919.926952749] [flight_path_overlay]: Sent uav2 planned path to Gazebo (7 points).
+[goto_point_hover_node-9]  [1794889933.684271228] [uav2.goto_point_node]: 航点1/6已到达并稳定0.5秒。
+[goto_point_hover_node-9]  [1794889933.684446435] [uav2.goto_point_node]: 开始航点2/6：(-8.500, 11.500, 10.000) m。
+[goto_point_hover_node-6]  [1794889934.705249328] [uav1.goto_point_node]: 航点4/6已到达并稳定0.5秒。
+[goto_point_hover_node-6]  [1794889934.705375073] [uav1.goto_point_node]: 开始航点5/6：(-9.000, -2.000, 12.000) m。
+[goto_point_hover_node-6]  [1794889951.979701480] [uav1.goto_point_node]: 航点5/6已到达并稳定0.5秒。
+[goto_point_hover_node-6]  [1794889951.979957567] [uav1.goto_point_node]: 开始航点6/6：(-24.000, -18.000, 2.000) m。
+[goto_point_hover_node-9]  [1794889952.786905192] [uav2.goto_point_node]: 航点2/6已到达并稳定0.5秒。
+[goto_point_hover_node-9]  [1794889952.787001551] [uav2.goto_point_node]: 开始航点3/6：(-6.000, 15.959, 10.000) m。
+[goto_point_hover_node-9]  [1794889961.249962036] [uav2.goto_point_node]: 航点3/6已到达并稳定0.5秒。
+[goto_point_hover_node-9]  [1794889961.250119630] [uav2.goto_point_node]: 开始航点4/6：(-9.000, 10.500, 10.000) m。
+[goto_point_hover_node-9]  [1794889972.200961344] [uav2.goto_point_node]: 航点4/6已到达并稳定0.5秒。
+[goto_point_hover_node-9]  [1794889972.201100554] [uav2.goto_point_node]: 开始航点5/6：(-15.000, -9.000, 8.000) m。
+[goto_point_hover_node-6]  [1794889972.260664274] [uav1.goto_point_node]: 航点6/6已到达并稳定0.5秒。
+[goto_point_hover_node-6]  [1794889972.260908811] [uav1.goto_point_node]: 已返航并稳定悬停，保持Offboard。
+[mission_dispatcher_node-4]  [1794889972.261343483] [mission_dispatcher_node]: UAV1 完成 #4，已回到 S1。已返航并稳定悬停，保持Offboard。
+[mission_dispatcher_node-4]  [1794889972.391338598] [mission_dispatcher_node]: 派单 #7 给 UAV1：S1 → C → S1；待派 2 单。
+[planner_node-7]  [1794889972.998943928] [uav1.planner_node]: A*第1/2段：扩展32428格，原始83点，简化后4点。
+[planner_node-7]  [1794889973.337097094] [uav1.planner_node]: A*第2/2段：扩展23819格，原始83点，简化后4点。
+[planner_node-7]  [1794889973.337579636] [uav1.planner_node]: 规划完成：保留2个关键点，输出6个执行航点，扩展56247格，耗时758.7 ms。
+[goto_point_hover_node-6]  [1794889973.337887445] [uav1.goto_point_node]: 接收map路径：6个航点，准备自动起飞；只在最后一个点保持或降落。
+[goto_point_hover_node-6]  [1794889973.387350667] [uav1.goto_point_node]: 开始航点1/6：(-8.000, -2.000, 12.000) m。
+[flight_path_overlay-12]  [1794889973.426556486] [flight_path_overlay]: Sent uav1 planned path to Gazebo (7 points).
+[goto_point_hover_node-9]  [1794889990.657496116] [uav2.goto_point_node]: 航点5/6已到达并稳定0.5秒。
+[goto_point_hover_node-9]  [1794889990.657856337] [uav2.goto_point_node]: 开始航点6/6：(-22.000, -18.000, 2.000) m。
+[goto_point_hover_node-6]  [1794889994.538552819] [uav1.goto_point_node]: 航点1/6已到达并稳定0.5秒。
+[goto_point_hover_node-6]  [1794889994.538827682] [uav1.goto_point_node]: 开始航点2/6：(5.000, 12.000, 14.000) m。
+[goto_point_hover_node-9]  [1794890004.051324109] [uav2.goto_point_node]: 航点6/6已到达并稳定0.5秒。
+[goto_point_hover_node-9]  [1794890004.051790609] [uav2.goto_point_node]: 已返航并稳定悬停，保持Offboard。
+[mission_dispatcher_node-4]  [1794890004.051908088] [mission_dispatcher_node]: UAV2 完成 #6，已回到 S2。已返航并稳定悬停，保持Offboard。
+[mission_dispatcher_node-4]  [1794890004.116301552] [mission_dispatcher_node]: 派单 #8 给 UAV2：S2 → C → S2；待派 1 单。
+[planner_node-10]  [1794890004.802001966] [uav2.planner_node]: A*第1/2段：扩展33784格，原始77点，简化后4点。
+[planner_node-10]  [1794890005.143645800] [uav2.planner_node]: A*第2/2段：扩展24358格，原始77点，简化后5点。
+[planner_node-10]  [1794890005.143741519] [uav2.planner_node]: 规划完成：保留2个关键点，输出7个执行航点，扩展58142格，耗时772.5 ms。
+[goto_point_hover_node-9]  [1794890005.144139201] [uav2.goto_point_node]: 接收map路径：7个航点，准备自动起飞；只在最后一个点保持或降落。
+[goto_point_hover_node-9]  [1794890005.168616127] [uav2.goto_point_node]: 开始航点1/7：(2.000, 4.500, 16.000) m。
+[flight_path_overlay-12]  [1794890005.178454650] [flight_path_overlay]: Sent uav2 planned path to Gazebo (8 points).
+[goto_point_hover_node-6]  [1794890011.900415354] [uav1.goto_point_node]: 航点2/6已到达并稳定0.5秒。
+[goto_point_hover_node-6]  [1794890011.900663317] [uav1.goto_point_node]: 开始航点3/6：(16.000, 17.000, 14.000) m。
+[goto_point_hover_node-6]  [1794890025.050385120] [uav1.goto_point_node]: 航点3/6已到达并稳定0.5秒。
+[goto_point_hover_node-6]  [1794890025.050529710] [uav1.goto_point_node]: 开始航点4/6：(4.000, 11.000, 14.000) m。
+[goto_point_hover_node-9]  [1794890032.930127655] [uav2.goto_point_node]: 航点1/7已到达并稳定0.5秒。
+[goto_point_hover_node-9]  [1794890032.930666901] [uav2.goto_point_node]: 开始航点2/7：(11.500, 14.000, 16.000) m。
+[goto_point_hover_node-6]  [1794890040.350037674] [uav1.goto_point_node]: 航点4/6已到达并稳定0.5秒。
+[goto_point_hover_node-6]  [1794890040.350180811] [uav1.goto_point_node]: 开始航点5/6：(-9.000, -2.000, 12.000) m。
+[goto_point_hover_node-9]  [1794890046.892544751] [uav2.goto_point_node]: 航点2/7已到达并稳定0.5秒。
+[goto_point_hover_node-9]  [1794890046.893382844] [uav2.goto_point_node]: 开始航点3/7：(16.000, 17.000, 14.000) m。
+[goto_point_hover_node-9]  [1794890056.210484353] [uav2.goto_point_node]: 航点3/7已到达并稳定0.5秒。
+[goto_point_hover_node-9]  [1794890056.210617772] [uav2.goto_point_node]: 开始航点4/7：(9.500, 10.500, 16.000) m。
+[goto_point_hover_node-6]  [1794890057.848354890] [uav1.goto_point_node]: 航点5/6已到达并稳定0.5秒。
+[goto_point_hover_node-6]  [1794890057.848500562] [uav1.goto_point_node]: 开始航点6/6：(-24.000, -18.000, 2.000) m。
+[goto_point_hover_node-9]  [1794890069.644802674] [uav2.goto_point_node]: 航点4/7已到达并稳定0.5秒。
+[goto_point_hover_node-9]  [1794890069.645085702] [uav2.goto_point_node]: 开始航点5/7：(4.500, 5.500, 16.000) m。
+[goto_point_hover_node-6]  [1794890078.464950966] [uav1.goto_point_node]: 航点6/6已到达并稳定0.5秒。
+[goto_point_hover_node-6]  [1794890078.465342937] [uav1.goto_point_node]: 已返航并稳定悬停，保持Offboard。
+[mission_dispatcher_node-4]  [1794890078.465448885] [mission_dispatcher_node]: UAV1 完成 #7，已回到 S1。已返航并稳定悬停，保持Offboard。
+[mission_dispatcher_node-4]  [1794890078.603283699] [mission_dispatcher_node]: 派单 #9 给 UAV1：S1 → B → S1；待派 0 单。
+[planner_node-7]  [1794890078.998354684] [uav1.planner_node]: A*第1/2段：扩展21148格，原始70点，简化后4点。
+[planner_node-7]  [1794890079.218939606] [uav1.planner_node]: A*第2/2段：扩展20730格，原始70点，简化后4点。
+[planner_node-7]  [1794890079.219136864] [uav1.planner_node]: 规划完成：保留2个关键点，输出6个执行航点，扩展41878格，耗时425.7 ms。
+[goto_point_hover_node-6]  [1794890079.219604446] [uav1.goto_point_node]: 接收map路径：6个航点，准备自动起飞；只在最后一个点保持或降落。
+[goto_point_hover_node-6]  [1794890079.249874999] [uav1.goto_point_node]: 开始航点1/6：(-17.500, -8.500, 8.000) m。
+[flight_path_overlay-12]  [1794890079.426976431] [flight_path_overlay]: Sent uav1 planned path to Gazebo (7 points).
+[goto_point_hover_node-9]  [1794890079.495234561] [uav2.goto_point_node]: 航点5/7已到达并稳定0.5秒。
+[goto_point_hover_node-9]  [1794890079.495338545] [uav2.goto_point_node]: 开始航点6/7：(-20.000, -17.000, 3.000) m。
+[goto_point_hover_node-6]  [1794890093.813804111] [uav1.goto_point_node]: 航点1/6已到达并稳定0.5秒。
+[goto_point_hover_node-6]  [1794890093.814019703] [uav1.goto_point_node]: 开始航点2/6：(-8.500, 11.500, 10.000) m。
+[goto_point_hover_node-9]  [1794890108.282141987] [uav2.goto_point_node]: 航点6/7已到达并稳定0.5秒。
+[goto_point_hover_node-9]  [1794890108.282479678] [uav2.goto_point_node]: 开始航点7/7：(-22.000, -18.000, 2.000) m。
+[goto_point_hover_node-6]  [1794890113.007808557] [uav1.goto_point_node]: 航点2/6已到达并稳定0.5秒。
+[goto_point_hover_node-6]  [1794890113.008045519] [uav1.goto_point_node]: 开始航点3/6：(-6.000, 15.959, 10.000) m。
+[goto_point_hover_node-9]  [1794890114.258164093] [uav2.goto_point_node]: 航点7/7已到达并稳定0.5秒。
+[goto_point_hover_node-9]  [1794890114.258438535] [uav2.goto_point_node]: 已返航并稳定悬停，保持Offboard。
+[mission_dispatcher_node-4]  [1794890114.258661662] [mission_dispatcher_node]: UAV2 完成 #8，已回到 S2。已返航并稳定悬停，保持Offboard。
+[goto_point_hover_node-6]  [1794890121.480449650] [uav1.goto_point_node]: 航点3/6已到达并稳定0.5秒。
+[goto_point_hover_node-6]  [1794890121.480705497] [uav1.goto_point_node]: 开始航点4/6：(-9.000, 10.500, 10.000) m。
+[goto_point_hover_node-6]  [1794890132.553537520] [uav1.goto_point_node]: 航点4/6已到达并稳定0.5秒。
+[goto_point_hover_node-6]  [1794890132.553695124] [uav1.goto_point_node]: 开始航点5/6：(-15.000, -9.000, 8.000) m。
+[goto_point_hover_node-6]  [1794890150.577669766] [uav1.goto_point_node]: 航点5/6已到达并稳定0.5秒。
+[goto_point_hover_node-6]  [1794890150.577893804] [uav1.goto_point_node]: 开始航点6/6：(-24.000, -18.000, 2.000) m。
+[goto_point_hover_node-6]  [1794890164.850566567] [uav1.goto_point_node]: 航点6/6已到达并稳定0.5秒。
+[goto_point_hover_node-6]  [1794890164.850900450] [uav1.goto_point_node]: 已返航并稳定悬停，保持Offboard。
+[mission_dispatcher_node-4]  [1794890164.850995807] [mission_dispatcher_node]: UAV1 完成 #9，已回到 S1。已返航并稳定悬停，保持Offboard。

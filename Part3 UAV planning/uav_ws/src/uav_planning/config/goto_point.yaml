@@ -1,0 +1,42 @@
+# 单机和双机共用：合法map路径触发起飞、逐点直线移动、末点稳定后自主降落。
+# 当前为新增楼顶地图；任务由/uav/mission提供，p2_p3_p4_path.yaml仅为示例。
+# 两个节点共用起飞高度、仿真时间与规划边界，只保留一份输入。
+/**:
+  ros__parameters:
+    use_sim_time: true
+    takeoff_altitude: 2.0    # m；先相对起点上升2米，A*也从这个悬停点开始。
+    flight_area_min: [-26.0, -20.0, 1.0]
+    flight_area_max: [26.0, 20.0, 18.0]
+
+/**/goto_point_node:
+  ros__parameters:
+    control_rate: 20.0       # Hz；位置参考和Offboard心跳的发布频率。
+    feedback_timeout: 1.0    # PX4位置/状态反馈的接收超时，单位仿真秒。
+
+    # 地图map是ENU（东、北、上），PX4是本地NED（北、东、下）。
+    # 参考点是base_link原点，不是脚架接地点；NED参考每次从地面反馈锁定。
+    # 2026-11-06地面实测：模型Z=-0.013，加机体偏移0.24，得到Z=0.227 m。
+    # 来源为test/validate_goto_point.py；换机型、出生点或地面后重新标定。
+    # 未知参考高度用.nan表示并拒绝运行，不使用随意填入的0。
+    map_reference_position: [-24.0, -18.0, 0.227]  # S1；双机 launch 覆盖 S2 的参考点。
+
+    max_speed: 2.0          # m/s；原0.5提高到1.0，名义最大参考速度翻倍。
+    # max_speed约束生成的参考轨迹，实际机体瞬时速度可能存在跟踪超调。
+    max_acceleration: 0.5   # m/s²；名义位置参考的加速/减速限制。
+    auto_land: true        # 最后一个航点稳定0.5秒后降落；中间点只停稳，不降落。
+
+    # 目标与起飞后的轨迹使用map绝对坐标，单位米；起飞地面段单独处理。
+    # 原位相对起飞2米后，由A*规划发布节点提供的访问点，不设固定中转层。
+    # 命名路线映射见mission_points.yaml；表面Z加visit_height得到访问高度。
+    # 航点高度均为map绝对Z；不能把楼顶标记Z直接作为机体接触高度。
+    # 区域内部仍有建筑；末端由PX4降至最后目的点所在的地面或屋顶。
+
+    # A*输出通过/uav/path输入；用户关键航点通过/uav/mission交给planner_node。
+    # 实际航点由发布节点提供，示例见p2_p3_p4_path.yaml；控制参数中不存固定路线。
+    # 保持初始偏航；到点阈值、预发心跳时间和阶段超时采用代码内命名常量。
+
+/**/planner_node:
+  ros__parameters:
+    resolution: 0.5        # m；三维搜索栅格间距。
+    clearance: 1.5         # m；建筑净空，另加半格保守处理离散边界。
+    # world_file默认读取当前包share/worlds/flood_demo.sdf。

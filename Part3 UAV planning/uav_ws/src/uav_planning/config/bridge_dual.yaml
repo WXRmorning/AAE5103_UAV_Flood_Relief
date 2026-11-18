@@ -1,0 +1,18 @@
+# 一次桥接公共仿真时钟，两架飞机的世界坐标真值分别输出供验证。
+- ros_topic_name: /clock
+  gz_topic_name: /clock
+  ros_type_name: rosgraph_msgs/msg/Clock
+  gz_type_name: gz.msgs.Clock
+  direction: GZ_TO_ROS
+
+- ros_topic_name: /uav1/ground_truth
+  gz_topic_name: /model/x500_0/odometry
+  ros_type_name: nav_msgs/msg/Odometry
+  gz_type_name: gz.msgs.Odometry
+  direction: GZ_TO_ROS
+
+- ros_topic_name: /uav2/ground_truth
+  gz_topic_name: /model/x500_1/odometry
+  ros_type_name: nav_msgs/msg/Odometry
+  gz_type_name: gz.msgs.Odometry
+  direction: GZ_TO_ROS
